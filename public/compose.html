@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yomibitoshirazu — 詠む</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .compose-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  .compose-paper {
+    width: clamp(14rem, 50vw, 18rem);
+    height: min(70vh, 28rem);
+    border-left:  1px solid rgba(22, 33, 58, 0.2);
+    border-right: 1px solid rgba(22, 33, 58, 0.2);
+    padding: 1.2rem 0.6rem;
+    display: flex;
+  }
+
+  .compose-input {
+    writing-mode: vertical-rl;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: "Klee One", "Shippori Mincho", serif;
+    font-size: 1.4rem;
+    line-height: 2;
+    letter-spacing: 0.18em;
+    color: var(--sumi);
+    padding: 0;
+    text-align: start;
+    caret-color: var(--sumi);
+  }
+  .compose-input::placeholder { color: rgba(22, 33, 58, 0.28); }
+
+  .compose-action {
+    writing-mode: vertical-rl;
+    background: transparent;
+    border: none;
+    font-family: "Shippori Mincho", "Yu Mincho", serif;
+    font-size: 1rem;
+    letter-spacing: 0.5em;
+    cursor: pointer;
+    padding: 1rem 0.4rem;
+    transition: color 0.2s, opacity 0.2s;
+    user-select: none;
+    text-decoration: none;
+  }
+  a.compose-action.cancel { color: rgba(22, 33, 58, 0.4); }
+  button.compose-action.submit { color: rgba(22, 33, 58, 0.65); }
+  .compose-action:hover:not(:disabled) { color: var(--sumi); }
+  .compose-action:disabled { color: rgba(22, 33, 58, 0.18); cursor: not-allowed; }
+
+  /* 投稿成功時のフェードアウト */
+  body.releasing .compose-screen { opacity: 0; transition: opacity 0.35s ease; }
+</style>
+</head>
+<body class="compose">
+  <a class="title" href="/">yomibitoshirazu</a>
+
+  <div class="compose-screen">
+    <a class="compose-action cancel" href="/">やめる</a>
+    <div class="compose-paper">
+      <textarea
+        class="compose-input"
+        id="poemInput"
+        placeholder="ここでひとつ"
+        maxlength="140"
+        spellcheck="false"
+        autocomplete="off"
+        autofocus></textarea>
+    </div>
+    <button class="compose-action submit" id="submitBtn" disabled>流す</button>
+  </div>
+
+  <script src="/compose.js" type="module"></script>
+</body>
+</html>

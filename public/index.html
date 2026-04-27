@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yomibitoshirazu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Klee+One:wght@400;600&family=Shippori+Mincho:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .stage {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .poem {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    writing-mode: vertical-rl;
+    font-family: "Klee One", "Shippori Mincho", serif;
+    font-size: clamp(2.4rem, 5vh, 4rem);
+    line-height: 2.0;
+    letter-spacing: 0.18em;
+    color: var(--sumi);
+    white-space: pre-wrap;
+    max-height: 82vh;
+    text-shadow:
+      0 0 1px rgba(22, 33, 58, 0.2),
+      0 1px 0 rgba(255, 255, 255, 0.15);
+    will-change: transform, opacity;
+  }
+
+  .compose-link {
+    position: fixed;
+    bottom: 1.8rem;
+    left: 1.8rem;
+    z-index: 10;
+    background: rgba(22, 33, 58, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(22, 33, 58, 0.3);
+    color: rgba(22, 33, 58, 0.7);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .compose-link svg { width: 1.35rem; height: 1.35rem; display: block; }
+  .compose-link:hover {
+    background: rgba(22, 33, 58, 0.13);
+    border-color: var(--sumi);
+    color: var(--sumi);
+    transform: scale(1.06);
+  }
+</style>
+</head>
+<body class="wall">
+  <a class="title" href="/">yomibitoshirazu</a>
+  <div class="stage" id="stage"></div>
+
+  <a class="compose-link" href="/compose" title="詠む" aria-label="詠む">
+    <svg viewBox="0 0 24 24" stroke="currentColor" fill="currentColor"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 12 4 Q 7 12 7 16 A 5 5 0 0 0 17 16 Q 17 12 12 4 Z"
+            stroke-width="1.4" fill="currentColor"/>
+    </svg>
+  </a>
+
+  <script src="/wall.js" type="module"></script>
+</body>
+</html>

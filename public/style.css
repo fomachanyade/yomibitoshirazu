@@ -1,0 +1,79 @@
+/* yomibitoshirazu — shared base */
+
+:root {
+  --wall-1: #8aafce;
+  --wall-2: #6a91b3;
+  --wall-3: #527693;
+  --sumi:   #16213a;
+  --sumi-dim: rgba(22, 33, 58, 0.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+
+body {
+  font-family: "Shippori Mincho", "Yu Mincho", serif;
+  color: var(--sumi);
+  position: relative;
+}
+
+/* --- wall surface (used on the wall page) --- */
+body.wall {
+  background-color: #6890b0;
+  background-image:
+    radial-gradient(ellipse 800px 600px at 25% 20%, rgba(195, 220, 238, 0.45), transparent 70%),
+    radial-gradient(ellipse 700px 800px at 80% 75%, rgba(40, 65, 95, 0.3),    transparent 65%),
+    radial-gradient(ellipse 500px 400px at 90% 15%, rgba(210, 230, 240, 0.3), transparent 60%),
+    radial-gradient(ellipse 400px 300px at 10% 90%, rgba(30, 50, 80, 0.25),   transparent 55%),
+    linear-gradient(165deg, var(--wall-1) 0%, var(--wall-2) 50%, var(--wall-3) 100%);
+}
+
+/* --- compose surface (used on /compose) --- */
+body.compose {
+  background-color: #93b4ce;
+  background-image:
+    radial-gradient(ellipse 95vh 75vh at center, rgba(190, 215, 235, 0.28), transparent 72%);
+}
+
+/* shared noise */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' seed='5'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.35;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='2' seed='1'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.97  0 0 0 0 1  0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity: 0.4;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+body.compose::before { opacity: 0.18; }
+body.compose::after { opacity: 0.25; }
+
+/* --- title (top center, latin) --- */
+.title {
+  position: fixed;
+  top: 1.4rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: "EB Garamond", "Cormorant Garamond", "Times New Roman", serif;
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: clamp(0.25em, 1vw, 0.4em);
+  color: var(--sumi-dim);
+  user-select: none;
+  z-index: 10;
+  text-decoration: none;
+  padding-left: 0.4em;
+  display: block;
+  transition: color 0.2s;
+}
+a.title:hover { color: var(--sumi); }
