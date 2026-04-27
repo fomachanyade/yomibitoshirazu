@@ -24,12 +24,9 @@
 - [x] `db/seeds.sql` (種詠 9 首)
 - [x] `package.json` に `cf:dev` / `deploy` / `cf:db:migrate(:remote)` / `cf:db:seed(:remote)` を追加
 - [x] ローカル動作確認 (`wrangler dev` で全エンドポイント通過)
-- [ ] **本番デプロイ (人間タスク。 Cloudflare 認証が要る)**
-  1. `bunx wrangler login`
-  2. `bunx wrangler d1 create yomibitoshirazu` → 出てきた `database_id` を `wrangler.toml` に貼る
-  3. `bun run cf:db:migrate:remote`
-  4. (任意) `bun run cf:db:seed:remote`
-  5. `bun run deploy`
+- [x] 本番デプロイ済み → https://yomibitoshirazu.fomachanyade.workers.dev
+  - D1 にスキーマ + 種詠 9 首投入済み (seed は二度撒かないこと)
+  - 再デプロイ手順: `bun run deploy` (コード変更時) / `bun run cf:db:migrate:remote` (スキーマ変更時)
 
 ### 2. レート制限
 
