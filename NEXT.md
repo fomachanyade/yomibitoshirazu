@@ -17,17 +17,19 @@
 これがメインタスク。
 ローカル開発との差し替えだけで載るように設計済み。
 
-- [ ] `src/db/d1.ts` に `D1PoemRepo` を実装する
-  - `env.DB.prepare(sql).bind(...).first()` / `.run()` を使う
-  - 既存の `BunSqlitePoemRepo` と同じインターフェイス (`PoemRepo`) を満たす
-- [ ] `src/worker.ts` を新規作成 (Workers エントリポイント)
-  - `createApp(repo)` を呼んで Hono アプリを組み立て、 `app.fetch` を export
-  - 静的ファイルは Workers Assets を使う (wrangler.toml の `[assets]` に `directory = "./public"`)
-- [ ] `wrangler.toml` を書く
-  - `wrangler d1 create yomibitoshirazu` で DB 作成
-  - `migrations/` ディレクトリを切って `db/schema.sql` をマイグレーションとして登録
-- [ ] `package.json` のスクリプトに `deploy`, `cf:dev` を追加
-- [ ] デプロイ後の動作確認
+- [x] `src/db/d1.ts` に `D1PoemRepo` を実装
+- [x] `src/worker.ts` (Workers エントリ。`/api/*` は Hono、 残りは `env.ASSETS.fetch` に委譲)
+- [x] `wrangler.toml` (D1 binding + Workers Assets。`run_worker_first = true`)
+- [x] `migrations/0001_init.sql` (`db/schema.sql` と同期)
+- [x] `db/seeds.sql` (種詠 9 首)
+- [x] `package.json` に `cf:dev` / `deploy` / `cf:db:migrate(:remote)` / `cf:db:seed(:remote)` を追加
+- [x] ローカル動作確認 (`wrangler dev` で全エンドポイント通過)
+- [ ] **本番デプロイ (人間タスク。 Cloudflare 認証が要る)**
+  1. `bunx wrangler login`
+  2. `bunx wrangler d1 create yomibitoshirazu` → 出てきた `database_id` を `wrangler.toml` に貼る
+  3. `bun run cf:db:migrate:remote`
+  4. (任意) `bun run cf:db:seed:remote`
+  5. `bun run deploy`
 
 ### 2. レート制限
 

@@ -6,13 +6,21 @@
     "dev": "bun --hot src/server.ts",
     "start": "bun src/server.ts",
     "db:init": "bun src/scripts/init-db.ts",
-    "db:seed": "bun src/scripts/seed.ts"
+    "db:seed": "bun src/scripts/seed.ts",
+    "cf:dev": "wrangler dev",
+    "cf:db:migrate": "wrangler d1 migrations apply yomibitoshirazu --local",
+    "cf:db:migrate:remote": "wrangler d1 migrations apply yomibitoshirazu --remote",
+    "cf:db:seed": "wrangler d1 execute yomibitoshirazu --local --file=db/seeds.sql",
+    "cf:db:seed:remote": "wrangler d1 execute yomibitoshirazu --remote --file=db/seeds.sql",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "hono": "^4.6.10"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250101.0",
     "@types/bun": "latest",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "wrangler": "^3.90.0"
   }
 }

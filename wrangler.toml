@@ -1,0 +1,18 @@
+name = "yomibitoshirazu"
+main = "src/worker.ts"
+compatibility_date = "2025-07-18"
+
+# D1 (SQLite). database_id は `wrangler d1 create yomibitoshirazu` の出力で差し替える。
+[[d1_databases]]
+binding = "DB"
+database_name = "yomibitoshirazu"
+database_id = "REPLACE_AFTER_WRANGLER_D1_CREATE"
+migrations_dir = "migrations"
+
+# 静的ファイルは Workers Assets に任せる。
+# run_worker_first=true で全リクエストを先に Worker に通し、Worker から
+# env.ASSETS.fetch で静的ファイルを取り出す (拡張子なしの /compose 等のため)。
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
