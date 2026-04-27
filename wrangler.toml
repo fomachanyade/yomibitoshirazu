@@ -6,7 +6,7 @@ compatibility_date = "2025-07-18"
 [[d1_databases]]
 binding = "DB"
 database_name = "yomibitoshirazu"
-database_id = "REPLACE_AFTER_WRANGLER_D1_CREATE"
+database_id = "be4fde51-ac87-4320-8eda-e3a5d5ab2f1e"
 migrations_dir = "migrations"
 
 # 静的ファイルは Workers Assets に任せる。
